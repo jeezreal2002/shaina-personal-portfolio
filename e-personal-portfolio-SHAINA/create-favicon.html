@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 2px solid #ddd;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        button {
+            background: linear-gradient(135deg, #6BA6FF, #FF8BA7);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        h1 {
+            color: #1E2A3A;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #5A6B7F;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Favicon Generator</h1>
+        <p>Generate a custom favicon for Shaina's Portfolio</p>
+        
+        <canvas id="faviconCanvas" width="512" height="512"></canvas>
+        
+        <button onclick="downloadFavicon()">Download Favicon</button>
+        
+        <p style="margin-top: 20px; font-size: 14px;">
+            <strong>Instructions:</strong><br>
+            1. Click "Download Favicon" button<br>
+            2. Save as "favicon.png" in your project root folder<br>
+            3. Refresh your website to see the new favicon!
+        </p>
+    </div>
+
+    <script>
+        // Create favicon
+        const canvas = document.getElementById('faviconCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Aurora gradient background
+        const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+        gradient.addColorStop(0, '#6BA6FF');
+        gradient.addColorStop(0.5, '#FF8BA7');
+        gradient.addColorStop(1, '#F9E4B7');
+
+        // Fill background with gradient
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 512, 512);
+
+        // Add circular white border
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 20;
+        ctx.beginPath();
+        ctx.arc(256, 256, 220, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Draw initials "SD"
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 280px Poppins, Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('SD', 256, 276);
+
+        // Add shadow for depth
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 5;
+
+        function downloadFavicon() {
+            // Create download link
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            alert('Favicon downloaded! Save it as "favicon.png" in your project root folder.');
+        }
+    </script>
+</body>
+</html>
+
